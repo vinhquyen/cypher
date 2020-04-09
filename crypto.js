@@ -2,7 +2,6 @@
  * @copyright ©Melqui Brito. All rights reserved.
  * @author Melqui Brito
  * @version 1.0.0 (2020-04-08)
- * @description Clean and simple extended methods to encrypt and decrypt strings based on synchronous cryptography. Encryption and decryption is done by using symmetric keys.
  */
 
 (function () {
