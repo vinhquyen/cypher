@@ -5,7 +5,7 @@ Clean, fast and efficient methods for encryption and decryption of text data bas
 ```javascript
   var KEY = String.getSymmetricKey();
 ```
-You can pretty much use anything as a key. Just make sure it isn't too short and nor too long.
+You can pretty much use anything as a key. Just make sure it isn't too short and neither too long.
 
 ## Encrypting...
 ```javascript
