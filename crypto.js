@@ -117,7 +117,12 @@
                 iData--;
                 update()
             }
-            return decodeURIComponent(data.join(''))
+            try {
+                let decryptedData = decodeURIComponent(data.join(''))
+                return decryptedData
+            } catch (e) {
+                return data.join('')
+            }
         }
         return undefined
     }
