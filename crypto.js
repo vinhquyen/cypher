@@ -43,7 +43,7 @@
             }
 
             let endingPoint = keyIsLarger ? iData - 1 : iKey - 1,
-                boundary = data.length > 127 ? 126 : data.length - 1,
+                boundary = data.length > 93 ? 93 : data.length - 1,
                 placer = Math.round(Math.random() * boundary);
 
             if (endingPoint < 0) {
@@ -131,16 +131,40 @@
     }
 
     /**
-     * @description Method appended to String that returns a randomized string key
+     * @description Method appended to String that returns a unique randomized string key
      * @returns string
      */
     String.getSymmetricKey = function () {
-        return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
-            let n = Math.round(Math.random() * 93) + 33;
-            while (n === 34 || n === 39 || n === 92){
-                n = Math.round(Math.random() * 93) + 33;
+        let d = new Date().getTime(),
+            m = (performance && performance.now && (performance.now() * 1000)) || -1,
+            getChar = function (n) {
+                let code = n > 93 ? 32 + (n - 93) : (33 + n);
+                return String.fromCharCode(code)
+            };
+            d = d.toString();
+            m = m.toString().slice(0, 4);
+        return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxyyyyyyzz'.replace(/[xyz]/g, function (c) {
+            let n;
+            if (c === 'x') {
+                n = Math.round(Math.random() * 93)
+            } else {
+                if (c === 'y') {
+                    n = parseInt(d.slice(0, 2));
+                    d = d.slice(2)
+                }
+                if (c === 'z') {
+                    if (m > 0) {
+                        n = parseInt(m.slice(0, 2));
+                        m = m.slice(2)
+                    } else {
+                        n = Math.round(Math.random() * 93)
+                    }
+                }
             }
-            return String.fromCharCode(n)
+            if (n === 34 || n === 39 || n === 92){
+                n++;
+            }
+            return getChar(n)
         })
     }
 
@@ -175,4 +199,31 @@
         return null
     }
 
+    Object.encrypt = function (data, key, asObject = true) {
+        try {
+            let encryptedData = data.encrypt(key)
+            encryptedData = typeof encryptedData === "object" && !asObject ? encryptedData['encrypted-data'] : encryptedData
+            return encryptedData
+        } catch (e) {
+            return undefined
+        }
+    }
+
+    Object.decrypt = function (data, key, asObject = true) {
+        let dataType = typeof data;
+        try {
+            let object;
+            if(asObject) {
+                object = dataType === "object" ? data.decrypt(key) : JSON.parse(data.decrypt(key))
+            } else {
+                object = data.decrypt(key);
+                if (dataType === "number" || dataType === "object") {
+                    object = JSON.stringify(object)
+                }
+            }
+            return object
+        } catch (e) {
+            return undefined
+        }
+    }
 })();
