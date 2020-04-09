@@ -2,18 +2,18 @@
  * @copyright ©Melqui Brito. All rights reserved.
  * @author Melqui Brito
  * @version 1.0.0 (2020-04-08)
- * @description Clean, fast and efficient methods for encryption and decryption of text data based on synchronous cryptography. Encryption and decryption is done by the use of symmetric keys.
+ * @description Clean, fast and efficient methods for encryption and decryption of text and object data based on synchronous cryptography. Encryption and decryption is done by the use of symmetric keys.
  */
 
 (function () {
     /**
-     * @description Method appended to String.prototype to perform encryption.
+     * @description Method appended to String.prototype to perform encryption
      * @param key: string
-     * @requires key param, which must either be a String instance, an Object instance or pretty much anything that can be converted to string through toString method. Its length must be greater than zero.
+     * @requires key param, which must either be a string or an instance of an object that can be converted to string through toString method and have its length different than zero
      * @returns encrypted string data
      */
     String.prototype.encrypt = function (key) {
-        let xKey = typeof key === "string" ? key : typeof key === "object" ? JSON.stringify(key) : key.toString();
+        let xKey = key ? key.toString() : undefined;
         if (xKey && xKey.length && this.length) {
             let keys = encodeURIComponent(xKey).split(''),
                 data = encodeURIComponent(this).split(''),
@@ -57,17 +57,18 @@
             enctrypted = enctrypted.slice(0, placer) + endChar + enctrypted.slice(placer);
             return placerChar + enctrypted
         }
-        return undefined
+        return null
     }
 
     /**
      * @description Method appended to String.prototype to perform decryption
      * @param key: string
-     * @requires Key param that was used when encrypting this String instance.
+     * @requires Key param which must be a string and have its length different than zero. 
+     *           Use the same key that was used when encrypting this string instance.
      * @returns string
      */
     String.prototype.decrypt = function (key) {
-        let xKey = typeof key === "string" ? key : typeof key === "object" ? JSON.stringify(key) : key.toString();
+        let xKey = key ? key.toString() : undefined;
         if (xKey && xKey.length && this.length) {
             let data = [],
                 keys = encodeURIComponent(xKey).split(''),
@@ -126,7 +127,7 @@
                 return data.join('')
             }
         }
-        return undefined
+        return null
     }
 
     /**
@@ -142,4 +143,36 @@
             return String.fromCharCode(n)
         })
     }
+
+    /**
+     * @description Method appended to Object.prototype to perform encryption
+     * @param key
+     * @requires Key 
+     * @returns JSON object: {"enctypted-data": "encrypted string data here"} or null if no key is passed in
+     */
+    Object.prototype.encrypt = function(key) {
+        let data = JSON.stringify(this).encrypt(key);
+        return data ? {'encrypted-data': data} : null
+    }
+
+    /**
+     * @description Method appended to Object.prototype to perform decryption
+     * @param key
+     * @requires Key that was used when encrypting this Object instance.
+     * @returns JSON object or null if the actual object does not have the target property 'encrypted-data', or the target property is not of type "string" or any error occurred either during decryption or JSON parsing process.
+     */
+    Object.prototype.decrypt = function(key) {
+        if(this.hasOwnProperty('encrypted-data')) {
+            if(typeof this['encrypted-data'] === "string") {
+                try {
+                    let data = JSON.parse(this['encrypted-data'].decrypt(key));
+                    return data
+                } catch (e) {
+                    return null
+                }
+            }
+        }
+        return null
+    }
+
 })();
