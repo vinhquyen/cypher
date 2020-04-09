@@ -2,7 +2,8 @@
  * @copyright ©Melqui Brito. All rights reserved.
  * @author Melqui Brito
  * @version 1.0.0 (2020-04-08)
- * @description Clean, fast and efficient methods for encryption and decryption of text and object data based on synchronous cryptography. Encryption and decryption is done by the use of symmetric keys.
+ * @description Clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. 
+ * Encryption and decryption are done by the use of symmetric keys.
  */
 
 (function () {
