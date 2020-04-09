@@ -61,8 +61,8 @@
     /**
      * @description Method appended to String.prototype to perform decryption
      * @param key: string
-     * @requires The 'key' param which must be a string and have its length different than zero. 
-     *           The key must equal to the same one passed in as a parameter when encrypting for it to work as expected.
+     * @requires Key param which must be a string and have its length different than zero. 
+     *           Use the same key that was used when encrypting this string instance.
      * @returns string
      */
     String.prototype.decrypt = function (key) {
