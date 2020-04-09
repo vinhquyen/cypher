@@ -9,12 +9,13 @@
     /**
      * @description Method appended to String.prototype to perform encryption
      * @param key: string
-     * @requires key param, which must be a string and have its length different than zero
+     * @requires key param, which must either be a string or an instance of an object that can be converted to string through toString method and have its length different than zero
      * @returns encrypted string data
      */
     String.prototype.encrypt = function (key) {
-        if (key && key.length && this.length) {
-            let keys = encodeURIComponent(key).split(''),
+        let xKey = typeof key === "string" ? key : typeof key === "object" ? JSON.stringify(key) : key.toString();
+        if (xKey && xKey.length && this.length) {
+            let keys = encodeURIComponent(xKey).split(''),
                 data = encodeURIComponent(this).split(''),
                 getChar = function (n) {
                     let code = n < 0 ? (127 + n) : n > 93 ? 32 + (n - 93) : (33 + n);
@@ -67,9 +68,10 @@
      * @returns string
      */
     String.prototype.decrypt = function (key) {
-        if (key && key.length && this.length) {
+        let xKey = typeof key === "string" ? key : typeof key === "object" ? JSON.stringify(key) : key.toString();
+        if (xKey && xKey.length && this.length) {
             let data = [],
-                keys = encodeURIComponent(key).split(''),
+                keys = encodeURIComponent(xKey).split(''),
                 pointer = 126 - this.charCodeAt(0),
                 str = this.slice(1),
                 startingPoint = str[pointer].charCodeAt(0) - 33;
