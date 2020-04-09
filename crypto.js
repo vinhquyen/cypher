@@ -7,9 +7,9 @@
 
 (function () {
     /**
-     * @description Method appended to String.prototype to perform encryption
+     * @description Method appended to String.prototype to perform encryption.
      * @param key: string
-     * @requires key param, which must either be a string or an instance of an object that can be converted to string through toString method and have its length different than zero
+     * @requires key param, which must either be a String instance, an Object instance or pretty much anything that can be converted to string through toString method. Its length must be greater than zero.
      * @returns encrypted string data
      */
     String.prototype.encrypt = function (key) {
@@ -63,8 +63,7 @@
     /**
      * @description Method appended to String.prototype to perform decryption
      * @param key: string
-     * @requires Key param which must be a string and have its length different than zero. 
-     *           Use the same key that was used when encrypting this string instance.
+     * @requires Key param that was used when encrypting this String instance.
      * @returns string
      */
     String.prototype.decrypt = function (key) {
