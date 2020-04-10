@@ -72,7 +72,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
 
 ```javascript
   /** Decrypting... **/
-  let a = encryptedNumber.decrypt(key) // calling decrypt directly. returns the original number as either a number or string depending on what type encryptedNumber is. If it's a string, calling decrypt directly returns string. If it's an object, it returns the original number as a "number" type of object.
+  let a = encryptedNumber.decrypt(key) // calling decrypt directly returns the original number as either a number or string depending on what type encryptedNumber is. If it's a string, calling decrypt directly returns string. If it's an object, it returns the original number as a "number" type of object.
   let b = Object.decrypt(encryptedNumber, KEY) // returns the original number
   let c = Object.decrypt(encryptedNumber, KEY, false) // returns the original number, but as a string.
 ```
