@@ -18,7 +18,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
   str = str.decrypt(KEY); 
 
   /** Encrypting through Object.encrypt **/
-  str = "You can encrypt me in many different ways...";
+  let message = "You can encrypt me in many different ways...";
   let a = Object.encrypt(message); // returns an object like {'encrypted-data': 'encrypted string data here'} 
   let b = Object.encrypt(message)['encrypted-data']; // returns the encrypted string data
   let c = Object.encrypt(message, false); // false here means you want only the encrypted string data to be returned
@@ -36,7 +36,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
 ## Encrypting and decrypting Object type data
 * Objects
 ```javascript
-  /* Decrypting... */
+  /** Encrypting... **/
   var user = {
     firstname: "Someone's name",
     lastname: "Someone's lastname",
@@ -52,21 +52,42 @@ You can actually use anything as a key. Just have in mind that it's going to be 
 > Note: Types of __a__ and __b__ are both _"object"_. Types of __c__, __d__ and __e__ are _"string"_.
 
 ```javascript
-  /* Decrypting... */
+  /** Decrypting... **/
   // a and b return the original object if the key passed in is the same used when encrypting; otherwise, returns null.
   let a = encryptedObject.decrypt(KEY); 
   let b = Object.decrypt(encryptedObject, KEY);
   
-  // c, d and e return the original object, but stringified. It will likely return null if key doesn't match the original one used to encrypt the object.
-  let c = user.decrypt(KEY);
-  let d = Object.decrypt(user, KEY, false);
+  // returns the original object, but stringified. It will likely return null if key doesn't match the original one used to encrypt the object.
+  let d = Object.decrypt(encryptedObject, KEY, false);
 ```
 * Numbers
 ```javascript
-  /* Encrypting... */
+  /** Encrypting... **/
   var number = 42876312;
   let a = Object.encrypt(number, KEY); // returns an object like {'encrypted-data': 'encrypted string data here'}
   let b = Object.encrypt(number, KEY)['encrypted-data']; // returns the encrypted string data straight forwardly
   let c = Object.encrypt(number, KEY, false); // false here forces it to return a string, rather than an object type data.
 ```
+> Note: You can decrypt directly by calling the method decrypt, but if what you have to perform decryption is a string, you will get a string after decryption by calling decrypt directly. 
 
+```javascript
+  /** Decrypting... **/
+  let a = encryptedNumber.decrypt(key) // calling decrypt directly. returns the original number as either a number or string depending on what type encryptedNumber is. If it's a string, calling decrypt directly returns string. If it's an object, it returns the original number as a "number" type of object.
+  let b = Object.decrypt(encryptedNumber, KEY) // returns the original number
+  let c = Object.decrypt(encryptedNumber, KEY, false) // returns the original number, but as a string.
+```
+* Arrays
+```javascript
+  /** Encrypting... **/
+  var array = [1, 'x', {x: 1}, ['x', '1']];
+  let a = array.encrypt(KEY); // returns an object like {'encrypted-data': 'encrypted string data here'}
+  let b = Object.encrypt(array, KEY); // returns an object like {'encrypted-data': 'encrypted string data here'}
+  let c = Object.encrypt(array, KEY)['encrypted-data']; // returns the encrypted string data straight forwardly
+  let d = Object.encrypt(array, KEY, false); // false here forces it to return a string, rather than an object type data.
+```
+```javascript
+  /** Decrypting... **/
+  let a = encryptedArray.decrypt(key) // calling decrypt directly. returns the original array as either an array or string depending on what type encryptedArray is. If it's a string, calling decrypt directly returns the array stringified. If it's an object, it returns the original array.
+  let b = Object.decrypt(encryptedArray, KEY) // returns the original array
+  let c = Object.decrypt(encryptedArray, KEY, false) // returns the original array, but stringified.
+```
