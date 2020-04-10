@@ -68,7 +68,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
   let b = Object.encrypt(number, KEY)['encrypted-data']; // returns the encrypted string data straight forwardly
   let c = Object.encrypt(number, KEY, false); // false here forces it to return a string, rather than an object type data.
 ```
-> Note: You can decrypt directly by calling the method decrypt, but if what you have to perform decryption is a string, you will get a string after decryption by calling decrypt directly. 
+> Note: You can perform decryption directly by calling the method decrypt, but if what you have to perform decryption is a string, you'll get the original object as a string.
 
 ```javascript
   /** Decrypting... **/
@@ -87,7 +87,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
 ```
 ```javascript
   /** Decrypting... **/
-  let a = encryptedArray.decrypt(key) // calling decrypt directly. returns the original array as either an array or string depending on what type encryptedArray is. If it's a string, calling decrypt directly returns the array stringified. If it's an object, it returns the original array.
+  let a = encryptedArray.decrypt(key) // calling decrypt directly returns the original array as either an array or string depending on what type encryptedArray is. If it's a string, calling decrypt directly returns the array stringified. If it's an object, it returns the original array.
   let b = Object.decrypt(encryptedArray, KEY) // returns the original array
   let c = Object.decrypt(encryptedArray, KEY, false) // returns the original array, but stringified.
 ```
