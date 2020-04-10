@@ -206,25 +206,24 @@
             encryptedData = typeof encryptedData === "object" && !asObject ? encryptedData['encrypted-data'] : encryptedData
             return encryptedData
         } catch (e) {
-            return undefined
+            return null
         }
     }
 
     Object.decrypt = function (data, key, asObject = true) {
-        let dataType = typeof data;
+        let dataType = typeof data, 
+            result = data.decrypt(key);
         try {
-            let object;
             if(asObject) {
-                object = dataType === "object" ? data.decrypt(key) : JSON.parse(data.decrypt(key))
+                result = dataType === "object" ? result : JSON.parse(result)
             } else {
-                object = data.decrypt(key);
                 if (dataType === "number" || dataType === "object") {
-                    object = JSON.stringify(object)
+                    result = JSON.stringify(result)
                 }
             }
-            return object
+            return result
         } catch (e) {
-            return undefined
+            return null
         }
     }
 })();
