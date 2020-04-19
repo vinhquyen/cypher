@@ -1,4 +1,4 @@
-# Crypto
+# Data-Cipher
 Secure, clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. Encryption and decryption are done by the use of symmetric keys.
 
 ## Getting a SAFE and UNIQUE key
