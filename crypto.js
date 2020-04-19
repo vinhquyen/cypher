@@ -10,7 +10,7 @@
     
     /**
      * @description Method appended to String.prototype to perform encryption
-     * @param key: string
+     * @param key
      * @requires key param, which must either be a string or an instance of an object that can be converted to string through toString method and have its length different than zero
      * @returns {string|null}
      */
