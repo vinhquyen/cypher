@@ -1,17 +1,18 @@
 /**
  * @copyright ©Melqui Brito. All rights reserved.
  * @author Melqui Brito
- * @version 1.0.0 (2020-04-08)
- * @description Clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. 
+ * @version 1.1.0 (2020-04-19)
+ * @description Clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography.
  * Encryption and decryption are done by the use of symmetric keys.
  */
 
 (function () {
+    
     /**
      * @description Method appended to String.prototype to perform encryption
      * @param key: string
      * @requires key param, which must either be a string or an instance of an object that can be converted to string through toString method and have its length different than zero
-     * @returns encrypted string data
+     * @returns {string|null}
      */
     String.prototype.encrypt = function (key) {
         let xKey = key ? key.toString() : undefined;
@@ -22,94 +23,108 @@
                     let code = n < 0 ? (127 + n) : n > 93 ? 32 + (n - 93) : (33 + n);
                     return String.fromCharCode(code)
                 };
-
-            let iKey = 0,
-                iData = 0,
+            let startingPoint = {key: Math.floor(Math.random() * keys.length), data: Math.floor(Math.random() * data.length)};
+            let iKey = startingPoint.key,
+                iData = startingPoint.data,
                 keyCompleted = false,
-                dataCompleted = false,
-                keyIsLarger = keys.length > data.length;
+                dataCompleted = false;
+
+            let update = function () {
+                if (iKey === keys.length) {
+                    iKey = 0;
+                }
+                if (iKey === startingPoint.key) {
+                    keyCompleted = true
+                }
+                if (iData === (data.length)) {
+                    iData = 0;
+                }
+                if (iData === startingPoint.data) {
+                    dataCompleted = true
+                }
+            }
 
             while (!(keyCompleted && dataCompleted)) {
                 data[iData] = getChar(keys[iKey].charCodeAt(0) - data[iData].charCodeAt(0));
                 iKey++;
                 iData++;
-                if (iKey === keys.length) {
-                    iKey = 0;
-                    keyCompleted = true
-                }
-                if (iData === (data.length)) {
-                    iData = 0;
-                    dataCompleted = true
-                }
+                update()
             }
 
-            let endingPoint = keyIsLarger ? iData - 1 : iKey - 1,
+            let endingPoint = {
+                    key: iKey === 0 ? keys.length - 1 : iKey - 1,
+                    data: iData === 0 ? data.length - 1 : iData - 1
+                },
                 boundary = data.length > 93 ? 93 : data.length - 1,
-                placer = Math.round(Math.random() * boundary);
+                placer = {
+                    key: Math.round(Math.random() * boundary),
+                    data: Math.round(Math.random() * boundary)
+                };
+            let endChar = {
+                    key: String.fromCharCode(127 - endingPoint.key.toString().length),
+                    data: String.fromCharCode(127 - endingPoint.data.toString().length)
+                },
+                placerChar = {
+                    key: String.fromCharCode(126 - placer.key),
+                    data: String.fromCharCode(126 - placer.data)
+                },
+                encrypted = data.join('');
 
-            if (endingPoint < 0) {
-                endingPoint = keyIsLarger ? data.length : keys.length;
-                endingPoint--;
-            }
-
-            let endChar = String.fromCharCode(endingPoint + 33),
-                placerChar = String.fromCharCode(126 - placer),
-                enctrypted = data.join('');
-            enctrypted = enctrypted.slice(0, placer) + endChar + enctrypted.slice(placer);
-            return placerChar + enctrypted
+            encrypted = encrypted.slice(0, placer.key) + endChar.key + endingPoint.key + encrypted.slice(placer.key);
+            encrypted = encrypted.slice(0, placer.data) + endChar.data + endingPoint.data + encrypted.slice(placer.data);
+            return placerChar.key + encrypted + placerChar.data
         }
         return null
     }
-
+    
     /**
      * @description Method appended to String.prototype to perform decryption
-     * @param key: string
-     * @requires Key param which must be a string and have its length different than zero. 
+     * @param key
+     * @requires Key param which must be a string and have its length greater than zero.
      *           Use the same key that was used when encrypting this string instance.
-     * @returns string
+     * @returns {string|null}
      */
     String.prototype.decrypt = function (key) {
         let xKey = key ? key.toString() : undefined;
         if (xKey && xKey.length && this.length) {
             let data = [],
                 keys = encodeURIComponent(xKey).split(''),
-                pointer = 126 - this.charCodeAt(0),
-                str = this.slice(1),
-                startingPoint = str[pointer].charCodeAt(0) - 33;
+                pointer = {
+                    key: 126 - this.charCodeAt(0),
+                    data: 126 - this.charCodeAt(this.length - 1)
+                },
+                str = this.slice(1, this.length - 1),
+                startingPoint = {
+                    key: undefined,
+                    data: parseInt(str.slice(pointer.data + 1, pointer.data + (128 - str[pointer.data].charCodeAt(0))))
+                };
 
-            str = str.slice(0, pointer) + str.slice(pointer + 1);
+            str = str.slice(0, pointer.data) + str.slice(pointer.data + (128 - str[pointer.data].charCodeAt(0)));
+            startingPoint.key = parseInt(str.slice(pointer.key + 1, pointer.key + 1 + (127 - str[pointer.key].charCodeAt(0))));
+            str = str.slice(0, pointer.key) + str.slice(pointer.key + (128 - str[pointer.key].charCodeAt(0)));
+
             data = str.split('');
+            let iKey = startingPoint.key,
+                iData = startingPoint.data,
+                keyCompleted = false,
+                dataCompleted = false;
 
-            let iKey = keys.length - 1,
-                iData = data.length - 1,
-                keyIsLarger = keys.length > data.length,
-                limit = keyIsLarger ? keys.length : data.length;
-
-            if (keyIsLarger) {
-                iData = startingPoint
-            } else {
-                iKey = startingPoint
+            let update = function () {
+                if (iKey === -1) {
+                    iKey = keys.length - 1
+                }
+                if (iData === -1) {
+                    iData = data.length - 1
+                }
+                if (iKey === startingPoint.key) {
+                    keyCompleted = true
+                }
+                if (iData === startingPoint.data) {
+                    dataCompleted = true
+                }
             }
 
-            let handler_k = function () {
-                    if (iKey < 0) { 
-                        iKey = keys.length - 1;
-                    }
-                    if (iData === -1) {
-                        iData = data.length - 1;
-                    }
-                },
-                handler_d = function () {
-                    if (iData < 0) {
-                        iData = data.length - 1;
-                    }
-                    if (iKey === -1) {
-                        iKey = keys.length - 1;
-                    }
-                };
-            let update = keyIsLarger ? handler_k : handler_d;
-
-            for (let i = 0; i < limit; i++) {
+            while (!(keyCompleted && dataCompleted)) {
                 let result = keys[iKey].charCodeAt(0) - (data[iData].charCodeAt(0) - 33);
 
                 if (result < 33) {
@@ -132,18 +147,18 @@
     }
 
     /**
-     * @description Method appended to String that returns a unique randomized string key
-     * @returns string
+     * @description Method that returns a unique randomized string key
+     * @returns {string}
      */
-    String.getSymmetricKey = function () {
+    this.getSymmetricKey = function () {
         let d = new Date().getTime(),
             m = (performance && performance.now && (performance.now() * 1000)) || -1,
             getChar = function (n) {
                 let code = n > 93 ? 32 + (n - 93) : (33 + n);
                 return String.fromCharCode(code)
             };
-            d = d.toString();
-            m = m.toString().slice(0, 4);
+        d = d.toString();
+        m = m.toString().slice(0, 4);
         return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxyyyyyyzz'.replace(/[xyz]/g, function (c) {
             let n;
             if (c === 'x') {
@@ -172,8 +187,8 @@
     /**
      * @description Method appended to Object.prototype to perform encryption
      * @param key
-     * @requires Key 
-     * @returns JSON object: {"enctypted-data": "encrypted string data here"} or null if no key is passed in
+     * @requires Key
+     * @returns {{"enctypted-data": string}|null}
      */
     Object.prototype.encrypt = function(key) {
         let data = JSON.stringify(this).encrypt(key);
@@ -184,7 +199,7 @@
      * @description Method appended to Object.prototype to perform decryption
      * @param key
      * @requires Key that was used when encrypting this Object instance.
-     * @returns JSON object or null if the actual object does not have the target property 'encrypted-data', or the target property is not of type "string" or any error occurred either during decryption or JSON parsing process.
+     * @returns {{"enctypted-data": string}|null}
      */
     Object.prototype.decrypt = function(key) {
         if(this.hasOwnProperty('encrypted-data')) {
@@ -200,18 +215,30 @@
         return null
     }
 
+    /**
+     * @param data
+     * @param key
+     * @param asObject
+     * @returns {{"enctypted-data": string}|string|null}
+     */
     Object.encrypt = function (data, key, asObject = true) {
         try {
-            let encryptedData = data.encrypt(key)
-            encryptedData = typeof encryptedData === "object" && !asObject ? encryptedData['encrypted-data'] : encryptedData
+            let encryptedData = data.encrypt(key);
+            encryptedData = typeof encryptedData === "object" && !asObject ? encryptedData['encrypted-data'] : encryptedData;
             return encryptedData
         } catch (e) {
             return null
         }
     }
 
+    /**
+     * @param data
+     * @param key
+     * @param asObject
+     * @returns {{"enctypted-data": string}|string|null}
+     */
     Object.decrypt = function (data, key, asObject = true) {
-        let dataType = typeof data, 
+        let dataType = typeof data,
             result = data.decrypt(key);
         try {
             if(asObject) {
