@@ -3,7 +3,7 @@ Secure, clean, fast and efficient methods appended to String.prototype and Objec
 
 ## Getting a SAFE and UNIQUE key
 ```javascript
-  var KEY = String.getSymmetricKey();
+  var KEY = getSymmetricKey();
 ```
 You can actually use anything as a key. Just have in mind that it's going to be converted to string down the road.
 
