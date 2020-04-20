@@ -155,6 +155,9 @@
             m = (performance && performance.now && (performance.now() * 1000)) || -1,
             getChar = function (n) {
                 let code = n > 93 ? 32 + (n - 93) : (33 + n);
+                if (code === 34 || code === 39 || code === 92 || code === 96) {
+                    code++;
+                }
                 return String.fromCharCode(code)
             };
         d = d.toString();
@@ -176,9 +179,6 @@
                         n = Math.round(Math.random() * 93)
                     }
                 }
-            }
-            if (n === 34 || n === 39 || n === 92){
-                n++;
             }
             return getChar(n)
         })
