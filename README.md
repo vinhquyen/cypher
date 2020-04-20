@@ -13,7 +13,7 @@ console.log(data.encrypt(key));
 /* Possible OUTPUT: 
 
 x=hF~\v~0C}10~`O?Ou
-uMu~v|Dc~01Z~9'oOw
+xMeqv|D~~21c1Z'oOw
 tmu~4~v|l^&X"~1I'|
   
 */
