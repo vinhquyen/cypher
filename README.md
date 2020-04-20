@@ -2,7 +2,7 @@
 Secure, clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. Encryption and decryption are done by the use of symmetric keys.
 
 # About
-Cypher does not encrypt through allocation based on mapping patterns. Cypher encryption process is completely mathematical and therefore, no pattern can be observed in the encrypted data result. Furthermore, Cypher encryption process result is not persistent, which means that encrypting a particular object with particular key multiple times is highly unlikely to result in the same data - see demonstration below.
+Cypher does not encrypt through allocation based on mapping patterns. Cypher encryption process is completely mathematical and therefore, no pattern can be observed in the encrypted data result. Furthermore, Cypher encryption process result is not persistent, which means that encrypting a particular object with a particular key multiple times is highly unlikely to result in the same data - see demonstration below.
 
 ```javascript
 let data = "Cypher AAA", key = "_b7gBiG1oo";
