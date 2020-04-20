@@ -12,7 +12,7 @@ console.log(data.encrypt(key));
 console.log(data.encrypt(key));
 /* Possible OUTPUT: 
 
-x=hF~\v~0C}10~`O?Ou
+x%7~(yo~6}103V3I'Iv
 xMeqv|D~~21c1Z'oOw
 tmu~4~v|l^&X"~1I'|
   
