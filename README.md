@@ -1,6 +1,40 @@
 # Cypher
 Secure, clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. Encryption and decryption are done by the use of symmetric keys.
-
+# Methods 
+### getSymmetricKey
+ * returns: { string }
+ 
+### String.prototype.encrypt
+ * params: _key_ -> Either a string or anything that implements toString method.
+ * returns: { string }
+ 
+### String.prototype.decrypt
+ * params: _key_ -> Either a string or anything that implements toString method.
+ * returns: { string }
+ 
+### Object.prototype.encrypt
+ * params: _key_ -> Either a string or anything that implements toString method.
+ * returns: {{ 'encrypted-data': string }} 
+ 
+### Object.prototype.decrypt
+ * params: _key_ -> Either a string or anything that implements toString method.
+ * returns: {{ 'encrypted-data': string }}
+ 
+### Object.encrypt
+ * params: 
+      * _data_ -> Pretty much anything
+      * _key_ -> Either a string or anything that implements toString method.
+      * _asObject_ -> Boolean to determine whether the result should be returned as an object or as a string.
+ * returns: {{'encrypted-data': string}|string|null}}
+ 
+### Object.decrypt
+ * params: 
+      * _data_ -> Pretty much anything
+      * _key_ -> Either a string or anything that implements toString method.
+      * _asObject_ -> Boolean to determine whether the result should be returned as an object or as a string.
+ * returns: {{'encrypted-data': string}|string|null}}
+ 
+# Tutorial
 ## Getting a SAFE and UNIQUE key
 ```javascript
   var KEY = getSymmetricKey();
