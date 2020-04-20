@@ -2,23 +2,23 @@
 Secure, clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. Encryption and decryption are done by the use of symmetric keys.
 # Methods 
 ### getSymmetricKey
- * returns: { string }
+ * returns: {string}
  
 ### String.prototype.encrypt
  * params: _key_ -> Either a string or anything that implements toString method.
- * returns: { string }
+ * returns: {string}
  
 ### String.prototype.decrypt
  * params: _key_ -> Either a string or anything that implements toString method.
- * returns: { string }
+ * returns: {string}
  
 ### Object.prototype.encrypt
  * params: _key_ -> Either a string or anything that implements toString method.
- * returns: {{ 'encrypted-data': string }} 
+ * returns: {{'encrypted-data': string}} 
  
 ### Object.prototype.decrypt
  * params: _key_ -> Either a string or anything that implements toString method.
- * returns: {{ 'encrypted-data': string }}
+ * returns: {{'encrypted-data': string}}
  
 ### Object.encrypt
  * params: 
