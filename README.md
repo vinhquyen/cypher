@@ -7,16 +7,9 @@ Cypher does not encrypt through allocation based on mapping patterns. Cypher enc
 ```javascript
 let data = "Cypher AAA", key = "_b7gBiG1oo";
 
-console.log(data.encrypt(key));
-console.log(data.encrypt(key));
-console.log(data.encrypt(key));
-/* Possible OUTPUT: 
-
-x%7~(yo~6}103V3I'Iv
-xMeqv|D~~21c1Z'oOw
-tmu~4~v|l^&X"~1I'|
-  
-*/
+console.log(data.encrypt(key)); // Possible OUTPUT: x%7~(yo~6}103V3I'Iv
+console.log(data.encrypt(key)); // Possible OUTPUT: xMeqv|D~~21c1Z'oOw
+console.log(data.encrypt(key)); // Possible OUTPUT: tmu~4~v|l^&X"~1I'|
 ```
 
 # Methods 
