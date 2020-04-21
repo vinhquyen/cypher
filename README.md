@@ -37,14 +37,14 @@ console.log(data.encrypt(key)); // Possible OUTPUT: tmu~4~v|l^&X"~1I'|
       * _data_ -> Pretty much anything
       * _key_ -> Either a string or anything that implements toString method.
       * _asObject_ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
- * returns: {{'encrypted-data': string}|string|null}}
+ * returns: {{'encrypted-data': string}|string|null}
  
 #### Object.decrypt
  * params: 
       * _data_ -> Pretty much anything
       * _key_ -> Either a string or anything that implements toString method.
       * _asObject_ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
- * returns: {{'encrypted-data': string}|string|null}}
+ * returns: {{'encrypted-data': string}|string|null}
  
 ## Tutorial
 ### Getting a SAFE and UNIQUE key
