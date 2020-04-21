@@ -1,7 +1,7 @@
 # Cypher
 Secure, clean, fast and efficient methods appended to String.prototype and Object.prototype for encryption and decryption based on synchronous cryptography. Encryption and decryption are done by the use of symmetric keys.
 
-# About
+## About
 Cypher does not encrypt through allocation based on mapping patterns. Cypher encryption process is completely mathematical and therefore, no pattern can be observed in the encrypted data result. Furthermore, Cypher encryption process result is not persistent, which means that encrypting a particular object with a particular key multiple times is highly unlikely to result in the same data - see demonstration below.
 
 ```javascript
@@ -12,48 +12,48 @@ console.log(data.encrypt(key)); // Possible OUTPUT: xMeqv|D~~21c1Z'oOw
 console.log(data.encrypt(key)); // Possible OUTPUT: tmu~4~v|l^&X"~1I'|
 ```
 
-# Methods 
-### getSymmetricKey
+## Methods 
+#### getSymmetricKey
  * returns: {string}
  
-### String.prototype.encrypt
+#### String.prototype.encrypt
  * params: _key_ -> Either a string or anything that implements toString method.
  * returns: {string}
  
-### String.prototype.decrypt
+#### String.prototype.decrypt
  * params: _key_ -> Either a string or anything that implements toString method.
  * returns: {string}
  
-### Object.prototype.encrypt
+#### Object.prototype.encrypt
  * params: _key_ -> Either a string or anything that implements toString method.
  * returns: {{'encrypted-data': string}} 
  
-### Object.prototype.decrypt
+#### Object.prototype.decrypt
  * params: _key_ -> Either a string or anything that implements toString method.
  * returns: {{'encrypted-data': string}}
  
-### Object.encrypt
+#### Object.encrypt
  * params: 
       * _data_ -> Pretty much anything
       * _key_ -> Either a string or anything that implements toString method.
       * _asObject_ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
  * returns: {{'encrypted-data': string}|string|null}}
  
-### Object.decrypt
+#### Object.decrypt
  * params: 
       * _data_ -> Pretty much anything
       * _key_ -> Either a string or anything that implements toString method.
       * _asObject_ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
  * returns: {{'encrypted-data': string}|string|null}}
  
-# Tutorial
-## Getting a SAFE and UNIQUE key
+## Tutorial
+### Getting a SAFE and UNIQUE key
 ```javascript
   var KEY = getSymmetricKey();
 ```
 You can actually use anything as a key. Just have in mind that it's going to be converted to string down the road.
 
-## Encrypting and decrypting String data type
+### Encrypting and decrypting String data type
 ```javascript
   /** Encrypting through String.prototype.encrypt **/
   let str = "Hi there!".encrypt(KEY); // directly
@@ -79,7 +79,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
   let data = Object.decrypt(encryptedStringData, false);
 ```
 
-## Encrypting and decrypting Object data type
+### Encrypting and decrypting Object data type
 * Objects
 ```javascript
   /** Encrypting... **/
@@ -137,3 +137,5 @@ You can actually use anything as a key. Just have in mind that it's going to be 
   let b = Object.decrypt(encryptedArray, KEY) // returns the original array
   let c = Object.decrypt(encryptedArray, KEY, false) // returns the original array, but stringified.
 ```
+## License
+This project is licensed under the __MIT License__ - see the [LICENSE](LICENSE.md) file for more details.
