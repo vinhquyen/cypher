@@ -60,7 +60,7 @@ tmu~4~v|l^&X"~1I'|
 ```
 You can actually use anything as a key. Just have in mind that it's going to be converted to string down the road.
 
-## Encrypting and decrypting String type data
+## Encrypting and decrypting String data type
 ```javascript
   /** Encrypting through String.prototype.encrypt **/
   let str = "Hi there!".encrypt(KEY); // directly
@@ -86,7 +86,7 @@ You can actually use anything as a key. Just have in mind that it's going to be 
   let data = Object.decrypt(encryptedStringData, false);
 ```
 
-## Encrypting and decrypting Object type data
+## Encrypting and decrypting Object data type
 * Objects
 ```javascript
   /** Encrypting... **/
