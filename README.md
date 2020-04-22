@@ -19,22 +19,22 @@ console.log(data.encrypt(key)); // Possible OUTPUT: tmu~4~v|l^&X"~1I'|
 #### String.prototype.encrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
- * returns: _string_
+ * returns: _string|null_
  
 #### String.prototype.decrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
- * returns: _string_
+ * returns: _string|null_
  
 #### Object.prototype.encrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
- * returns: _{'encrypted-data': string}_
+ * returns: _{'encrypted-data': string}|null_
  
 #### Object.prototype.decrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
- * returns: _{'encrypted-data': string}_
+ * returns: _{'encrypted-data': string}|null_
  
 #### Object.encrypt
  * params: 
