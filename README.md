@@ -14,37 +14,41 @@ console.log(data.encrypt(key)); // Possible OUTPUT: tmu~4~v|l^&X"~1I'|
 
 ## Methods 
 #### getSymmetricKey
- * returns: string
+ * returns: _string_
  
 #### String.prototype.encrypt
- * params: _key_ -> Either a string or anything that implements toString method.
- * returns: string
+ * params: 
+      * __key__ -> Either a string or anything that implements toString method.
+ * returns: _string_
  
 #### String.prototype.decrypt
- * params: _key_ -> Either a string or anything that implements toString method.
- * returns: string
+ * params: 
+      * __key__ -> Either a string or anything that implements toString method.
+ * returns: _string_
  
 #### Object.prototype.encrypt
- * params: _key_ -> Either a string or anything that implements toString method.
- * returns: {'encrypted-data': string}
+ * params: 
+      * __key__ -> Either a string or anything that implements toString method.
+ * returns: _{'encrypted-data': string}_
  
 #### Object.prototype.decrypt
- * params: _key_ -> Either a string or anything that implements toString method.
- * returns: {'encrypted-data': string}
+ * params: 
+      * __key__ -> Either a string or anything that implements toString method.
+ * returns: _{'encrypted-data': string}_
  
 #### Object.encrypt
  * params: 
-      * _data_ -> Pretty much anything
-      * _key_ -> Either a string or anything that implements toString method.
-      * _asObject_ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
- * returns: {'encrypted-data': string}|string|null
+      * __data__ -> Pretty much anything
+      * __key__ -> Either a string or anything that implements toString method.
+      * __asObject__ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
+ * returns: _{'encrypted-data': string}|string|null_
  
 #### Object.decrypt
  * params: 
-      * _data_ -> Pretty much anything
-      * _key_ -> Either a string or anything that implements toString method.
-      * _asObject_ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
- * returns: {'encrypted-data': string}|string|null
+      * __data__ -> Pretty much anything
+      * __key__ -> Either a string or anything that implements toString method.
+      * __asObject__ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
+ * returns: _{'encrypted-data': string}|string|null_
  
 ## Tutorial
 ### Getting a SAFE and UNIQUE key
