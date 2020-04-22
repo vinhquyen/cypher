@@ -144,5 +144,8 @@ You can actually use anything as a key. Just have in mind that it's going to be 
 ### Testing
 Are looking for a quick way to test Cypher out before using it? Just go [here](https://playcode.io/548162) and have fun! Do your testing on __testing.js__.
 
+## Author
+* [Melqui Brito](https://github.com/melquibrito)
+
 ## License
 This project is licensed under the __MIT License__ - see the [LICENSE](LICENSE.md) file for more details.
