@@ -13,37 +13,37 @@ console.log(data.encrypt(key)); // Possible OUTPUT: tmu~4~v|l^&X"~1I'|
 ```
 
 ## Methods 
-#### getSymmetricKey
+### getSymmetricKey
  * returns: string
  
-#### String.prototype.encrypt
+### String.prototype.encrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
  * returns: string\|null
  
-#### String.prototype.decrypt
+### String.prototype.decrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
  * returns: string\|null
  
-#### Object.prototype.encrypt
+### Object.prototype.encrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
  * returns: {'encrypted-data': string}\|null
  
-#### Object.prototype.decrypt
+### Object.prototype.decrypt
  * params: 
       * __key__ -> Either a string or anything that implements toString method.
  * returns: {'encrypted-data': string}\|null
  
-#### Object.encrypt
+### Object.encrypt
  * params: 
       * __data__ -> Pretty much anything
       * __key__ -> Either a string or anything that implements toString method.
       * __asObject__ -> Boolean to determine whether the result should be returned as a prototype of Object or a prototype of String.
  * returns: {'encrypted-data': string}\|string\|null
  
-#### Object.decrypt
+### Object.decrypt
  * params: 
       * __data__ -> Pretty much anything
       * __key__ -> Either a string or anything that implements toString method.
